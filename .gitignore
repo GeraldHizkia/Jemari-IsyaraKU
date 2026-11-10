@@ -1,0 +1,24 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Caches & environments
+.venv/
+env/
+venv/
+.pytest_cache/
+
+# Datasets & large extraction caches
+dataset/
+dataset_raw/
+*.npz
+*.mp4
+
+# Reference clones (have their own git repos)
+reference-jemari/
+reference-wlbisindo/
+
+# Operating System files
+Thumbs.db
+.DS_Store

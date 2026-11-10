@@ -1,4 +1,6 @@
-# Jemari BISINDO Translator 2.0 (Kosakata & Alfabet)
+# Jemari-IsyaraKU — Jemari BISINDO Translator 2.0 (Kosakata & Alfabet)
+
+> **Untuk membantu teman Tuli berkomunikasi lebih cepat, alami, dan inklusif.**
 
 Sistem pengenal Bahasa Isyarat Indonesia (BISINDO) real-time berbasis *Computer Vision* yang menggabungkan:
 1. **Mode Kosakata (Word-Level Recognition)**: Mengenali 32 kosakata BISINDO dari dataset penelitian **WL-BISINDO** menggunakan sekuens landmark temporal dan model *Bi-LSTM Attention* / *SPOTER*.
@@ -35,8 +37,6 @@ jemari-bisindo/
 │   ├── alphabet.js           # Pengenal alfabet client-side
 │   ├── wordRecognition.js    # Pengenal kata temporal & client API
 │   └── tts.js                # Modul Text-to-Speech Bahasa Indonesia
-├── reference-jemari/         # Repositori referensi Jemari asli
-├── reference-wlbisindo/      # Repositori referensi WL-BISINDO
 └── README.md
 ```
 
@@ -47,7 +47,7 @@ jemari-bisindo/
 ### 1. Jalankan Backend Server
 Di terminal PowerShell:
 ```powershell
-cd C:\Users\Admin\.gemini\antigravity\scratch\jemari-bisindo\backend
+cd backend
 python -m uvicorn app:app --host 127.0.0.1 --port 8000 --reload
 ```
 
@@ -94,7 +94,7 @@ Akses:
    ```
 2. **Organisasi Video (32 Kelas Dinamis):**
    ```bash
-   python pipeline/organize_wlbisindo.py --metadata reference-wlbisindo/data_structuring/SD_split_metadata.json --source dataset_raw --output dataset/SD
+   python pipeline/organize_wlbisindo.py --metadata SD_split_metadata.json --source dataset_raw --output dataset/SD
    ```
 3. **Ekstraksi Landmark Spatio-Temporal:**
    ```bash
@@ -108,6 +108,6 @@ Akses:
 ---
 
 ## 📝 Lisensi & Atribusi
-- **Jemari**: MIT License (Alvnvnc)
-- **WL-BISINDO**: CC BY-NC 4.0 (AceKinnn / Glenn Leonali dkk.)
-- **SPOTER**: Apache 2.0 / MIT (Matyas Bohacek)
+- **Jemari**: MIT License (Alvnvnc - [bisindo-translator](https://github.com/Alvnvnc/bisindo-translator))
+- **WL-BISINDO**: CC BY-NC 4.0 (AceKinnn / Glenn Leonali dkk. - [WL-BISINDO](https://github.com/AceKinnn/WL-BISINDO))
+- **SPOTER**: Apache 2.0 / MIT (Matyas Bohacek - [spoter](https://github.com/matyasbohacek/spoter))
