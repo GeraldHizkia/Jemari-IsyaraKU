@@ -1,0 +1,8 @@
+{
+  "model_type": "bilstm",
+  "in_features": 126,
+  "seq_len": 30,
+  "num_classes": 32,
+  "best_val_accuracy": 71.25,
+  "weights_file": "best_model.pt"
+}

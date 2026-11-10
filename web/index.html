@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jemari — Penerjemah BISINDO (Kosakata & Alfabet)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="brand">
+        <div class="brand-icon">🤟</div>
+        <div class="brand-text">
+          <h1>Jemari BISINDO Translator</h1>
+          <p>Pengenal Bahasa Isyarat Indonesia Real-time: Kosakata & Alfabet</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="vocabBtn" class="btn btn-secondary">
+          📖 Daftar 32 Kosakata
+        </button>
+        <div class="status-badge">
+          <span id="backendDot" class="status-dot"></span>
+          <span id="backendStatus">Backend: Memeriksa...</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mode Selector -->
+    <div class="mode-tabs">
+      <button id="tabWord" class="tab-btn active">
+        💬 Mode Kosakata (WL-BISINDO · 32 Kata)
+      </button>
+      <button id="tabAlphabet" class="tab-btn">
+        🔤 Mode Alfabet (A–Z Jemari · 26 Huruf)
+      </button>
+    </div>
+
+    <!-- Main Workspace -->
+    <div class="workspace-grid">
+      <!-- Camera Card -->
+      <div class="card">
+        <div class="video-container">
+          <video id="video" playsinline muted></video>
+          <canvas id="overlay"></canvas>
+          <div class="video-overlay-info">
+            <span id="detectionChip" class="chip">Menunggu Kamera...</span>
+            <span id="bufferChip" class="chip" style="display: none;">Buffer: 0 frame</span>
+          </div>
+        </div>
+
+        <div class="controls-bar">
+          <button id="startBtn" class="btn btn-primary">▶ Mulai Kamera</button>
+          <button id="stopBtn" class="btn btn-danger" disabled>⏹ Hentikan</button>
+          <button id="captureWordBtn" class="btn btn-secondary" style="margin-left: auto;">
+            ⚡ Tangkap Gestur Kata
+          </button>
+        </div>
+
+        <!-- Live Prediction Display -->
+        <div class="prediction-banner">
+          <div class="pred-left">
+            <span class="pred-title" id="predModeTitle">Kosakata Terdeteksi</span>
+            <span class="pred-value" id="currentPrediction">–</span>
+          </div>
+          <div class="confidence-meter-container">
+            <div class="confidence-bar-bg">
+              <div id="confidenceFill" class="confidence-bar-fill"></div>
+            </div>
+            <span id="confidenceText" class="confidence-text">Keyakinan: 0%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Output / Translation Card -->
+      <div class="card output-card">
+        <div class="card-title">
+          <span>Hasil Terjemahan</span>
+          <span id="statusHint" style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted);">Siap</span>
+        </div>
+
+        <div id="transcriptBox" class="transcript-area">
+          <span id="placeholderText" class="transcript-placeholder">
+            Gerakkan tangan di depan kamera. Kata atau huruf yang berhasil diterjemahkan akan tampil di sini...
+          </span>
+        </div>
+
+        <div class="transcript-actions">
+          <button id="speakBtn" class="btn btn-primary">🔊 Suarakan (TTS)</button>
+          <button id="copyBtn" class="btn btn-secondary">📋 Salin</button>
+          <button id="spaceBtn" class="btn btn-secondary">␣ Spasi</button>
+          <button id="backspaceBtn" class="btn btn-secondary">⌫ Hapus</button>
+          <button id="clearBtn" class="btn btn-secondary" style="margin-left: auto;">🗑️ Bersihkan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Kosakata 32 WL-BISINDO -->
+  <div id="vocabModal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Daftar 32 Kosakata WL-BISINDO</h3>
+        <button id="closeVocabBtn" class="btn btn-secondary" style="padding: 4px 10px;">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Dataset Word-Level BISINDO mencakup 32 kata isyarat berikut. Klik kata untuk mendengarkan lafalnya:
+        </p>
+        <div id="vocabGrid" class="vocab-grid">
+          <!-- Diisi dinamis oleh JavaScript -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
