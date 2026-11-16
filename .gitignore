@@ -18,6 +18,7 @@ dataset_raw/
 # Reference clones (have their own git repos)
 reference-jemari/
 reference-wlbisindo/
+reference-fslbisindo/
 
 # Operating System files
 Thumbs.db

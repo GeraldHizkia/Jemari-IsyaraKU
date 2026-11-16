@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jemari — Penerjemah BISINDO (Kosakata & Alfabet)</title>
+  <title>Jemari-IsyaraKU — Penerjemah BISINDO Dua Arah</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,13 +13,13 @@
       <div class="brand">
         <div class="brand-icon">🤟</div>
         <div class="brand-text">
-          <h1>Jemari BISINDO Translator</h1>
-          <p>Pengenal Bahasa Isyarat Indonesia Real-time: Kosakata & Alfabet</p>
+          <h1>Jemari-IsyaraKU</h1>
+          <p>Sistem Komunikasi Dua Arah Inklusif: Isyarat BISINDO ⟷ Suara & Teks</p>
         </div>
       </div>
       <div class="header-actions">
-        <button id="vocabBtn" class="btn btn-secondary">
-          📖 Daftar 32 Kosakata
+        <button id="guideBtn" class="btn btn-secondary">
+          📘 Panduan 32 Gerakan
         </button>
         <div class="status-badge">
           <span id="backendDot" class="status-dot"></span>
@@ -28,20 +28,23 @@
       </div>
     </header>
 
-    <!-- Mode Selector -->
+    <!-- Mode Selector Tabs -->
     <div class="mode-tabs">
       <button id="tabWord" class="tab-btn active">
-        💬 Mode Kosakata (WL-BISINDO · 32 Kata)
+        💬 Mode Kosakata (WL-BISINDO · 32 Kata Real)
       </button>
       <button id="tabAlphabet" class="tab-btn">
-        🔤 Mode Alfabet (A–Z Jemari · 26 Huruf)
+        🔤 Mode Eja Alfabet (A–Z · 26 Abjad)
+      </button>
+      <button id="tabHearing" class="tab-btn tab-hearing">
+        🎙️ Mode Suara Teman Dengar (Speech-to-Text)
       </button>
     </div>
 
-    <!-- Main Workspace -->
+    <!-- Main Workspace Grid -->
     <div class="workspace-grid">
-      <!-- Camera Card -->
-      <div class="card">
+      <!-- Camera Card (Untuk Teman Tuli) -->
+      <div class="card" id="cameraCard">
         <div class="video-container">
           <video id="video" playsinline muted></video>
           <canvas id="overlay"></canvas>
@@ -54,8 +57,8 @@
         <div class="controls-bar">
           <button id="startBtn" class="btn btn-primary">▶ Mulai Kamera</button>
           <button id="stopBtn" class="btn btn-danger" disabled>⏹ Hentikan</button>
-          <button id="captureWordBtn" class="btn btn-secondary" style="margin-left: auto;">
-            ⚡ Tangkap Gestur Kata
+          <button id="captureWordBtn" class="btn btn-warning" style="margin-left: auto;">
+            ⚡ Tangkap Gestur
           </button>
         </div>
 
@@ -72,23 +75,50 @@
             <span id="confidenceText" class="confidence-text">Keyakinan: 0%</span>
           </div>
         </div>
+
+        <!-- Top-3 Alternative Predictions Chips -->
+        <div id="topAlternatives" class="top-alternatives" style="display: none;">
+          <span class="alt-label">Alternatif Teratas:</span>
+          <div id="altChips" class="alt-chips-container"></div>
+        </div>
       </div>
 
-      <!-- Output / Translation Card -->
+      <!-- Hearing Card (Untuk Teman Dengar Berbicara ke Teman Tuli) -->
+      <div class="card" id="hearingCard" style="display: none;">
+        <div class="card-title">
+          <span>🎙️ Mikrofon Teman Dengar</span>
+          <span class="chip" id="sttStatus">Siap Merekam</span>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Teman dengar dapat berbicara langsung ke mikrofon. Suara akan langsung diubah menjadi teks besar di papan percakapan agar Teman Tuli dapat membaca dengan cepat dan jelas.
+        </p>
+        <div class="hearing-mic-box">
+          <button id="micToggleBtn" class="btn btn-primary btn-large-mic">
+            <span class="mic-icon">🎙️</span>
+            <span id="micBtnText">Mulai Berbicara</span>
+          </button>
+        </div>
+        <div class="hearing-interim-box">
+          <span class="pred-title">Deteksi Suara Masuk:</span>
+          <div id="sttInterimText" class="stt-live-text">–</div>
+        </div>
+      </div>
+
+      <!-- Output / Two-Way Conversation Board -->
       <div class="card output-card">
         <div class="card-title">
-          <span>Hasil Terjemahan</span>
+          <span>Papan Percakapan Inklusif</span>
           <span id="statusHint" style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted);">Siap</span>
         </div>
 
         <div id="transcriptBox" class="transcript-area">
           <span id="placeholderText" class="transcript-placeholder">
-            Gerakkan tangan di depan kamera. Kata atau huruf yang berhasil diterjemahkan akan tampil di sini...
+            Isyarat yang terdeteksi atau suara dari lawan bicara akan tampil di papan ini...
           </span>
         </div>
 
         <div class="transcript-actions">
-          <button id="speakBtn" class="btn btn-primary">🔊 Suarakan (TTS)</button>
+          <button id="speakBtn" class="btn btn-primary">🔊 Suarakan Teks (TTS)</button>
           <button id="copyBtn" class="btn btn-secondary">📋 Salin</button>
           <button id="spaceBtn" class="btn btn-secondary">␣ Spasi</button>
           <button id="backspaceBtn" class="btn btn-secondary">⌫ Hapus</button>
@@ -98,20 +128,18 @@
     </div>
   </div>
 
-  <!-- Modal Kosakata 32 WL-BISINDO -->
+  <!-- Modal Panduan 32 Gerakan WL-BISINDO -->
   <div id="vocabModal" class="modal-overlay">
     <div class="modal-box">
       <div class="modal-header">
-        <h3>Daftar 32 Kosakata WL-BISINDO</h3>
+        <h3>📘 Panduan 32 Kosakata WL-BISINDO (Akurasi: 99.38%)</h3>
         <button id="closeVocabBtn" class="btn btn-secondary" style="padding: 4px 10px;">✕</button>
       </div>
       <div class="modal-body">
         <p style="color: var(--text-muted); font-size: 0.9rem;">
-          Dataset Word-Level BISINDO mencakup 32 kata isyarat berikut. Klik kata untuk mendengarkan lafalnya:
+          Klik salah satu kata untuk mendengarkan lafal audio dan melihat tips gerakannya:
         </p>
-        <div id="vocabGrid" class="vocab-grid">
-          <!-- Diisi dinamis oleh JavaScript -->
-        </div>
+        <div id="vocabGrid" class="vocab-grid"></div>
       </div>
     </div>
   </div>

@@ -1,0 +1,5 @@
+{
+  "test_accuracy": 99.38,
+  "total_test_samples": 480,
+  "num_classes": 32
+}
