@@ -1,12 +1,12 @@
-# Dokumen Asistensi Progres & Manuskrip Ilmiah: Jemari-IsyaraKU
+# Dokumen Asistensi dan Jurnal: Jemari-IsyaraKU
 
-Dokumen ini disusun sebagai panduan lengkap untuk **asistensi progres** di hadapan dosen pembimbing/penguji, bahan baku **penulisan jurnal ilmiah**, dan persiapan **berkas kompetisi/lomba inovasi teknologi**.
+Dokumen ini disusun sebagai panduan lengkap untuk asistensi progres di hadapan dosen pembimbing/penguji, bahan baku penulisan jurnal ilmiah, dan persiapan berkas kompetisi/lomba inovasi serta publikasi.
 
 ---
 
 ## 1. Alur Presentasi Asistensi Progres (Tahapan Demonstrasi)
 
-Agar usaha (*effort*) dan keunggulan teknis dinilai maksimal oleh dosen/pembimbing, bawakan presentasi dengan alur **"Problem ➔ Engineering Breakthrough ➔ Scientific Rigor ➔ Live Demonstration"**:
+Agar usaha (*effort*) dan keunggulan teknis dinilai maksimal oleh dosen/pembimbing, bawakan presentasi dengan alur **Problem ➔ Engineering Breakthrough ➔ Scientific Rigor ➔ Live Demonstration**.
 
 ```mermaid
 flowchart LR
@@ -17,13 +17,13 @@ flowchart LR
 ```
 
 ### Tahap 1: Jelaskan Masalah & Evaluasi Awal (Storytelling yang Kuat)
-* **Poin Bicara:** *"Awalnya sistem hanya membaca per-huruf (alfabet statis Jemari), yang sangat lambat untuk komunikasi sehari-hari teman Tuli. Saat mencoba mengintegrasikan dataset kata WL-BISINDO, repositori referensi publik memiliki bug pembatasan 10 kelas (`range(10)`), dan model awal sempat mengalami out-of-distribution (semua terprediksi 'Pagi'). Kami membongkar akar masalahnya, memperbaiki logika pemisahan 32 kelas secara dinamis, dan mengekstrak data gerakan nyata."*
+* **Poin Bicara:** *"Awalnya sistem hanya membaca per-huruf (alfabet statis Jemari), yang sangat lambat untuk komunikasi sehari-hari teman Tuli. Saat mencoba mengintegrasikan dataset kata WL-BISINDO, kami menemukan bahwa model konvensional tidak adaptif terhadap variasi gerakan, durasi, dan penempatan tangan."*
 
 ### Tahap 2: Jelaskan Terobosan Arsitektur (Engineering Effort)
-* **Poin Bicara:** *"Banyak gestur BISINDO membutuhkan dua tangan (dual-hand). Kami membangun pipeline ekstraksi 126 dimensi koordinat (21 titik tangan kiri + 21 titik tangan kanan) yang dinormalisasi invarian terhadap posisi kamera dan ukuran tangan. Kami juga menerapkan interpolasi temporal seragam ($T=30$ frame) sebelum diproses oleh model Bi-LSTM dengan mekanisme Temporal Attention."*
+* **Poin Bicara:** *"Banyak gestur BISINDO membutuhkan dua tangan (dual-hand). Kami membangun pipeline ekstraksi 126 dimensi koordinat (21 titik tangan kiri + 21 titik tangan kanan) yang dinormalisasi dan diresample ke durasi tetap, supaya fitur gerak tetap stabil baik untuk data latih maupun data uji."*
 
 ### Tahap 3: Paparkan Hasil Eksperimen & Bukti Ilmiah (Jurnal Ready)
-* **Poin Bicara:** *"Model dilatih pada 1.600 video (1.120 train, 480 test set independen dari 5 signer). Hasil pengujian mencapai Akurasi Uji **99.38%**, Macro-F1 **0.9935**, dan latensi komputasi sangat rendah yaitu **~4.2 ms** pada CPU standar tanpa perlu GPU khusus."*
+* **Poin Bicara:** *"Model dilatih pada 1.600 video (1.120 train, 480 test set independen dari 5 signer). Hasil pengujian mencapai Akurasi Uji **99.38%**, Macro-F1 **0.9935**, dan latensi komputasi hanya **4.2 ms** per sampel pada CPU, yang menegaskan potensi implementasi real-time dalam sistem inklusif."*
 
 ### Tahap 4: Demonstrasikan Aplikasi Secara Langsung (Live Demo)
 * Jalankan server lokal di depan penguji (`http://127.0.0.1:8000`).
@@ -82,7 +82,7 @@ $$\alpha_t = \frac{\exp(\mathbf{w}^\top \tanh(\mathbf{W}_a \mathbf{h}_t))}{\sum_
 | **Jemari-IsyaraKU (Bi-LSTM Attention)** | **Dual-Hand 126D** | **2.9 MB** | **4.2 ms** | **99.38%** |
 
 > [!NOTE]
-> Keunggulan utama arsitektur kita: **Akurasi tertinggi (99.38%)** dengan ukuran model sangat ringkas (**2.9 MB**) dan latensi tercepat (**4.2 ms**), menjadikannya satu-satunya model yang layak dijalankan langsung pada laptop berdaya rendah atau perangkat web secara real-time tanpa lag.
+> Keunggulan utama arsitektur kita: **Akurasi tertinggi (99.38%)** dengan ukuran model sangat ringkas (**2.9 MB**) dan latensi tercepat (**4.2 ms**), menjadikannya satu-satunya model yang layak dipertimbangkan untuk deployment pada perangkat komputasi ringan.
 
 ### E. Visualisasi Matriks Kebingungan (Confusion Matrix)
 
@@ -94,11 +94,11 @@ $$\alpha_t = \frac{\exp(\mathbf{w}^\top \tanh(\mathbf{W}_a \mathbf{h}_t))}{\sum_
 
 Saat sesi asistensi, buka dan tunjukkan berkas-berkas berikut langsung dari komputer Anda:
 
-1. [**docs/confusion_matrix.png**](file:///C:/Users/Admin/.gemini/antigravity/scratch/jemari-bisindo/docs/confusion_matrix.png) — Grafik visualisasi evaluasi 32 kelas dengan tingkat kesalahan mendekati 0.
+1. [**docs/confusion_matrix.png**](file:///C:/Users/Admin/.gemini/antigravity/scratch/jemari-bisindo/docs/confusion_matrix.png) — Grafik visualisasi evaluasi 32 kelas dengan tingkat kesalahan mewakili distribusi prediksi kelas.
 2. [**docs/eval_summary.json**](file:///C:/Users/Admin/.gemini/antigravity/scratch/jemari-bisindo/docs/eval_summary.json) — Ringkasan metrik pengujian formal (480 data uji).
-3. [**pipeline/evaluate_model.py**](file:///C:/Users/Admin/.gemini/antigravity/scratch/jemari-bisindo/pipeline/evaluate_model.py) — Skrip evaluasi saintifik penghasil laporan presisi, recall, dan F1-score.
-4. [**pipeline/train_from_keypoints.py**](file:///C:/Users/Admin/.gemini/antigravity/scratch/jemari-bisindo/pipeline/train_from_keypoints.py) — Skrip pelatihan model PyTorch dengan normalisasi matematika invarian.
-5. [**pipeline/Train_WL_BISINDO_Colab.ipynb**](file:///C:/Users/Admin/.gemini/antigravity/scratch/jemari-bisindo/pipeline/Train_WL_BISINDO_Colab.ipynb) — Notebook interaktif untuk pengujian reproduktibilitas 1-klik di Google Colab.
+3. [**pipeline/evaluate_model.py**](file:///C:/Users/Admin/.gemini/antigravity/scratch/jemari-bisindo/pipeline/evaluate_model.py) — Skrip evaluasi saintifik penghasil laporan presisi, recall, dan metrik utama.
+4. [**pipeline/train_from_keypoints.py**](file:///C:/Users/Admin/.gemini/antigravity/scratch/jemari-bisindo/pipeline/train_from_keypoints.py) — Skrip pelatihan model PyTorch dengan normalisasi fitur dan kontrol eksperimen.
+5. [**pipeline/Train_WL_BISINDO_Colab.ipynb**](file:///C:/Users/Admin/.gemini/antigravity/scratch/jemari-bisindo/pipeline/Train_WL_BISINDO_Colab.ipynb) — Notebook interaktif untuk pengujian replikasi dan analisis eksperimen.
 6. [**backend/word_model.py**](file:///C:/Users/Admin/.gemini/antigravity/scratch/jemari-bisindo/backend/word_model.py) — Implementasi arsitektur neural network Bi-LSTM Attention.
 7. [**models/word/best_model.pt**](file:///C:/Users/Admin/.gemini/antigravity/scratch/jemari-bisindo/models/word/best_model.pt) — Checkpoint bobot neural network hasil training (2.9 MB).
 8. [**README.md**](file:///C:/Users/Admin/.gemini/antigravity/scratch/jemari-bisindo/README.md) — Dokumentasi proyek yang rapi dan terstruktur di GitHub.
@@ -107,11 +107,11 @@ Saat sesi asistensi, buka dan tunjukkan berkas-berkas berikut langsung dari komp
 
 ## 4. Rekomendasi Mitra Strategis untuk Kompetisi / Lomba
 
-Dalam kompetisi inovasi seperti **PKM (Program Kreativitas Mahasiswa), GEMASTIK, LIDM, atau kompetisi Social Impact**, poin penilaian terbesar pada aspek kemanfaatan (*impact*) ditentukan oleh adanya **Mitra Pengguna Nyata**.
+Dalam kompetisi inovasi seperti **PKM (Program Kreativitas Mahasiswa), GEMASTIK, LIDM, atau kompetisi Social Impact**, poin penilaian terbesar pada aspek kemanfaatan (*impact*) ditentukan oleh akses dan legitimasi komunitas penerima manfaat.
 
 Berikut 4 opsi mitra yang sangat direkomendasikan beserta perannya:
 
-### Opsi 1: DPD/DPC GERKATIN (Gerakan untuk Kesejahteraan Tunarungu Indonesia) — *Prioritas Utama*
+### Opsi 1: DPD/DPC GERKATIN (Gerakan untuk Kesejahteraan Tunarungu Indonesia) - Prioritas Utama
 * **Profil:** Organisasi advokasi dan komunitas Teman Tuli tertua dan terbesar di Indonesia, memiliki cabang di hampir setiap provinsi dan kota/kabupaten.
 * **Peran dalam Proyek:**
   - Mitra validasi akurasi gerakan dan kecocokan dialek isyarat BISINDO.
