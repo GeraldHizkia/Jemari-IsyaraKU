@@ -1,0 +1,48 @@
+============================================================
+EVALUASI PERFORMA MODEL BISINDO (32 KELAS)
+============================================================
+[✓] Model BILSTM (32 kelas) berhasil dimuat dari C:\Users\Admin\.gemini\antigravity\scratch\jemari-bisindo\backend\..\models\word\best_model.pt
+[*] Menguji 480 sampel uji (Test Set)...
+
+[✓] OVERALL TEST ACCURACY: 99.38%
+
+              precision    recall  f1-score   support
+
+         Air     0.9091    1.0000    0.9524        10
+     Belajar     1.0000    1.0000    1.0000        10
+        Cari     1.0000    1.0000    1.0000        10
+        Hari     1.0000    1.0000    1.0000        10
+       Ingat     1.0000    1.0000    1.0000        10
+        Lagi     1.0000    1.0000    1.0000        10
+        Maaf     1.0000    1.0000    1.0000        10
+       Makan     1.0000    1.0000    1.0000        10
+       Motor     1.0000    1.0000    1.0000        10
+        Saya     1.0000    1.0000    1.0000        10
+Terima Kasih     0.9091    1.0000    0.9524        10
+        Tuli     1.0000    1.0000    1.0000        10
+         Apa     1.0000    0.9444    0.9714        18
+       Siapa     1.0000    1.0000    1.0000        18
+       Kapan     1.0000    1.0000    1.0000        18
+     Di Mana     0.9474    1.0000    0.9730        18
+     Mengapa     1.0000    0.9444    0.9714        18
+   Bagaimana     1.0000    1.0000    1.0000        18
+       Merah     1.0000    1.0000    1.0000        18
+      Kuning     1.0000    1.0000    1.0000        18
+       Hijau     1.0000    1.0000    1.0000        18
+       Hitam     1.0000    1.0000    1.0000        18
+      Dengar     1.0000    1.0000    1.0000        18
+   Berangkat     1.0000    1.0000    1.0000        18
+      Datang     1.0000    1.0000    1.0000        18
+       Teman     1.0000    1.0000    1.0000        18
+    Keluarga     1.0000    0.9444    0.9714        18
+       Rumah     1.0000    1.0000    1.0000        18
+        Pagi     1.0000    1.0000    1.0000        18
+       Siang     1.0000    1.0000    1.0000        18
+        Sore     1.0000    1.0000    1.0000        18
+       Malam     1.0000    1.0000    1.0000        18
+
+    accuracy                         0.9938       480
+   macro avg     0.9927    0.9948    0.9935       480
+weighted avg     0.9942    0.9938    0.9938       480
+
+[✓] Confusion Matrix Plot tersimpan di: C:\Users\Admin\.gemini\antigravity\scratch\jemari-bisindo\pipeline\..\docs\confusion_matrix.png
